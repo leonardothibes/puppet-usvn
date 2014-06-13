@@ -1,8 +1,22 @@
 class usvn::params
 {
-	$download = 'https://github.com/leonardothibes/usvn/archive/'
+	$ensure = 'present'
+
+	# USVN
+	$version  = '1.0.7'
+	$download = 'https://github.com/usvn/usvn/archive'
 	$svnpath  = '/var/lib/usvn'
-	$dbhost   = 'localhost'
-	$dbuser   = 'usvn'
-	$dbname   = 'usvn'
+	$srcdir   = '/usr/src'
+	# USVN
+
+	# APACHE
+	$baseurl = '/svn'
+	$hosturl = 'svn.local'
+	# APACHE
+
+	# MYSQL
+	$dbuser = 'usvn'
+	$dbpass = 'usvn'
+	$dbname = 'usvn'
+	# MYSQL
 }
