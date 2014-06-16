@@ -28,7 +28,6 @@ class usvn::apache inherits usvn::params
 			docroot       => "${usvn::params::instdir}/current/public",
 		}
 		apache::vhost {'svn':
-			serveraliases   => [$url],
 			priority        => $priority,
 			port            => $port,
 			docroot         => "${usvn::params::instdir}/current/public",
