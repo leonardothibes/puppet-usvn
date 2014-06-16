@@ -5,8 +5,8 @@ class usvn::params
 	# USVN
 	$version  = '1.0.7'
 	$download = 'https://github.com/usvn/usvn/archive'
-	$svnpath  = '/var/lib/usvn'
 	$srcdir   = '/usr/src'
+	$svnpath  = '/var/lib/usvn'
 	$instdir  = '/usr/share/usvn'
 	# USVN
 
