@@ -62,6 +62,10 @@ define usvn::install($version = $title, $svnpath)
 			"test ! -d ${usvn::params::instdir}/${version}",
 		],
 	}
+	exec {'usvn-owner':
+		command => "chown -R www-data: ${usvn::params::instdir}/${version}",
+		require => Exec['copy-usvn'],
+	}
 	file {"${usvn::params::instdir}/current":
 		ensure => link,
 		target => "${usvn::params::instdir}/${version}",
