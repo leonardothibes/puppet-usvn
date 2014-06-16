@@ -70,7 +70,7 @@ define usvn::install($version = $title, $svnpath)
 
 	# Granting write permissions
 	exec {'write-permissions-step-1':
-		command => "chmod 777 ${usvn::params::instdir}/current/public",
+		command => "chmod 777 ${usvn::params::instdir}/current/public ${usvn::params::instdir}/current/config",
 		require => Exec['copy-usvn'],
 		before  => File['write-permissions-step-2'],
 	}
