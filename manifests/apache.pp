@@ -36,6 +36,12 @@ class usvn::apache inherits usvn::params
 			override        => 'All',
 		}
 		# Creating vhosts
+
+		# Installing Mysql compatibility of PHP
+		if !defined(Package['php5-mysqlnd']) {
+			package {'php5-mysqlnd': ensure => present}
+		}
+		# Installing Mysql compatibility of PHP
 	}
 
 	define mod($module = $title)
