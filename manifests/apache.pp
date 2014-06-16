@@ -20,18 +20,19 @@ class usvn::apache inherits usvn::params
 		# Loading Apache modules
 
 		# Creating vhosts
+		$docroot = "${usvn::params::instdir}/current/public"
 		::apache::vhost {'usvn':
 			serveraliases => [$url],
 			priority      => $priority,
 			port          => $port,
+			docroot       => $docroot,
 			override      => 'FileInfo',
-			docroot       => "${usvn::params::instdir}/current/public",
 		}
 		::apache::vhost {'svn':
 			priority        => $priority,
 			port            => $port,
+			docroot         => $docroot,
 			custom_fragment => template('usvn/fragment.erb'),
-			docroot         => "${usvn::params::instdir}/current/public",
 		}
 		# Creating vhosts
 	}
