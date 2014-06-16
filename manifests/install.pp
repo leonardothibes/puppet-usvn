@@ -26,6 +26,13 @@ define usvn::install($version = $title, $svnpath)
 	}
 	# Creating source directory
 
+	# Creating svn directory
+	file {$svnpath:
+		owner => 'www-data',
+		group => 'www-data',
+	}
+	# Creating svn directory
+
 	# Downloading the package
 	wget::fetch {'wget-usvn':
 		source      => $urlsource,
