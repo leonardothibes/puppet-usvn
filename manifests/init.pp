@@ -4,7 +4,7 @@ class usvn(
 	$svnpath  = $usvn::params::svnpath,
 	$url      = $usvn::params::vhost_url,
 	$baseurl  = $usvn::params::vhost_baseurl,
-	$port     = $usvn::params::port,
+	$port     = $usvn::params::vhost_port,
 	$priority = $usvn::params::vhost_priority,
 	$dbname   = $usvn::params::dbname,
 	$dbuser   = $usvn::params::dbuser,
@@ -16,8 +16,7 @@ class usvn(
 		'present': {
 			usvn::install {$version:
 				svnpath => $svnpath,
-			}
-			usvn::apache::configure {$url:
+			} -> usvn::apache::configure {$url:
 				baseurl  => $baseurl,
 				port     => $port,
 				priority => $priority,

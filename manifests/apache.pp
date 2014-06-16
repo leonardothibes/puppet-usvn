@@ -3,8 +3,8 @@ class usvn::apache inherits usvn::params
 	define configure($url = $title, $baseurl, $port, $priority, $svnpath)
 	{
 		# Configuring Apache
-		if !defined(Class['apache']) {
-			class {'apache':
+		if !defined(Class['::apache']) {
+			class {'::apache':
 				default_mods  => true,
 				default_vhost => false,
 				mpm_module    => 'prefork',
@@ -20,26 +20,26 @@ class usvn::apache inherits usvn::params
 		# Loading Apache modules
 
 		# Creating vhosts
-		apache::vhost {'usvn':
+		::apache::vhost {'usvn':
 			serveraliases => [$url],
 			priority      => $priority,
 			port          => $port,
-			overrride     => 'FileInfo',
+			override      => 'FileInfo',
 			docroot       => "${usvn::params::instdir}/current/public",
 		}
-		apache::vhost {'svn':
+		::apache::vhost {'svn':
 			priority        => $priority,
 			port            => $port,
-			docroot         => "${usvn::params::instdir}/current/public",
 			custom_fragment => template('usvn/fragment.erb'),
+			docroot         => "${usvn::params::instdir}/current/public",
 		}
 		# Creating vhosts
 	}
 
 	define mod($module = $title)
 	{
-		if !defined(Class["apache::mod::${module}"]) {
-			apache::mod {$module:}
+		if !defined(Class["::apache::mod::${module}"]) {
+			::apache::mod {$module:}
 		}
 	}
 }
