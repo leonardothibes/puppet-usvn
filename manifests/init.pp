@@ -21,11 +21,10 @@ class usvn(
 				port     => $port,
 				priority => $priority,
 				svnpath  => $svnpath,
+			} -> usvn::mysql::configure {$dbname:
+				dbuser => $dbuser,
+				dbpass => $dbpass,
 			}
-			#usvn::mysql::configure {$dbname:
-			#	dbuser => $dbuser,
-			#	dbpass => $dbpass,
-			#}
 		}
 		'absent': { notify {'Not implemented, yet...':} }
 		default : { fail("Unsupported option for \"ensure\" param: ${ensure}") }

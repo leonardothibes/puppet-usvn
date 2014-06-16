@@ -2,8 +2,14 @@ class usvn::mysql
 {
 	define configure($dbname = $title, $dbuser, $dbpass)
 	{
-		notify {"DBNAME: ${dbname}":}
-		notify {"DBUSER: ${dbuser}":}
-		notify {"DBPASS: ${dbpass}":}
+		if !defined(Class['::mysql::server']) {
+			include ::mysql::server
+		}
+		mysql::db {$dbname:
+			user     => $dbuser,
+			password => $dbpass,
+			host     => 'localhost',
+			grant    => 'all',
+		}
 	}
 }
