@@ -11,8 +11,10 @@ class usvn::params
 	# USVN
 
 	# APACHE
-	$baseurl = '/svn'
-	$hosturl = 'svn.local'
+	$vhost_url      = 'svn.local'
+	$vhost_baseurl  = '/svn'
+	$vhost_port     = '80'
+	$vhost_priority = '99'
 	# APACHE
 
 	# MYSQL
