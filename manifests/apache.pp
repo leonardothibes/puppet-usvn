@@ -21,14 +21,14 @@ class usvn::apache inherits usvn::params
 
 		# Creating vhosts
 		$docroot = "${usvn::params::instdir}/current/public"
-		::apache::vhost {'usvn':
+		::apache::vhost {"usvn.${fqdn}":
 			serveraliases => [$url],
 			priority      => $priority,
 			port          => $port,
 			docroot       => $docroot,
 			override      => 'All',
 		}
-		::apache::vhost {'svn':
+		::apache::vhost {"svn.${fqdn}":
 			priority        => $priority,
 			port            => $port,
 			docroot         => $docroot,
