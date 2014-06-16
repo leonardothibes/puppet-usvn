@@ -27,5 +27,37 @@ define usvn::install($version = $title, $svnpath)
 	# Creating source directory
 
 	# Downloading the package
+	wget::fetch {'wget-usvn':
+		source      => $urlsource,
+		destination => $destination,
+		before      => Exec['tar-usvn'],
+	}
 	# Downloading the package
+
+	# Unpacking the source
+	exec {'tar-usvn':
+		command => "tar -xzf ${destination}",
+		cwd     => $usvn::params::srcdir,
+		onlyif  => [
+			"test -f ${destination}",
+			"test ! -d ${usvn::params::srcdir}/usvn-${version}",
+		],
+		before  => Exec['copy-usvn'],
+	}
+	# Unpacking the source
+
+	# Installing the usvn
+	file {$usvn::params::instdir:}
+	exec {'copy-usvn':
+		command => "cp -Rf ${usvn::params::srcdir}/usvn-${version} ${usvn::params::instdir}/${version}",
+		onlyif  => [
+			"test -d ${usvn::params::srcdir}/usvn-${version}",
+			"test ! -d ${usvn::params::instdir}/${version}",
+		],
+	}
+	file {"${usvn::params::instdir}/current":
+		ensure => link,
+		target => "${usvn::params::instdir}/${version}",
+	}
+	# Installing the usvn
 }
