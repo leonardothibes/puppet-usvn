@@ -67,4 +67,18 @@ define usvn::install($version = $title, $svnpath)
 		target => "${usvn::params::instdir}/${version}",
 	}
 	# Installing the usvn
+
+	# Granting write permissions
+	exec {'write-permissions-step-1':
+		command => "chmod 777 ${usvn::params::instdir}/current/public",
+		require => Exec['copy-usvn'],
+		before  => File['write-permissions-step-2'],
+	}
+	file {'write-permissions-step-2':
+		ensure  => present,
+		path    => "${usvn::params::instdir}/current/config/config.ini",
+		content => '[general]',
+		mode    => 0777,
+	}
+	# Granting write permissions
 }
