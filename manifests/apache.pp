@@ -26,13 +26,14 @@ class usvn::apache inherits usvn::params
 			priority      => $priority,
 			port          => $port,
 			docroot       => $docroot,
-			override      => 'FileInfo',
+			override      => 'All',
 		}
 		::apache::vhost {'svn':
 			priority        => $priority,
 			port            => $port,
 			docroot         => $docroot,
 			custom_fragment => template('usvn/fragment.erb'),
+			override        => 'All',
 		}
 		# Creating vhosts
 	}
