@@ -17,6 +17,15 @@ node default {
 }
 ```
 
+Installing other version:
+```puppet
+node default {
+	class {'usvn':
+		'version' => '1.0.6', # Default is 1.0.7
+	}
+}
+```
+
 Contact
 -------
 
