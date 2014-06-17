@@ -47,12 +47,19 @@ class usvn::apache inherits usvn::params
 
 	define remove()
 	{
-		Exec { path => ['/bin','/usr/bin'] }
+		Exec { path => ['/bin','/usr/bin','/usr/sbin'] }
 		exec {'usvn::apache::remove::sites-enabled':
 			command => "find /etc/apache2/sites-enabled | grep svn.${fqdn} | xargs rm -f",
 		}
 		exec {'usvn::apache::remove::sites-available':
 			command => "find /etc/apache2/sites-available | grep svn.${fqdn} | xargs rm -f",
+		}
+		exec {'usvn::apache::restart':
+			command => 'apachectl restart',
+			require => [
+				Exec['usvn::apache::remove::sites-enabled'],
+				Exec['usvn::apache::remove::sites-available'],
+			],
 		}
 	}
 }
