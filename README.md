@@ -1,7 +1,7 @@
 puppet-usvn
 ===========
 
-A puppet module to install usvn subversion management tool.
+A puppet module to install [usvn](https://github.com/usvn/usvn) subversion management tool.
 
 ## Sample Usage
 Install env and use the provided configuration defaults:
