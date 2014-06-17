@@ -21,7 +21,25 @@ Installing other version:
 ```puppet
 node default {
 	class {'usvn':
-		'version' => '1.0.6', # Default is 1.0.7
+		version => '1.0.6', # Default is 1.0.7
+	}
+}
+```
+
+Defining the Subversion repository of directories:
+```puppet
+node default {
+	class {'usvn':
+		svnpath => '/svn', # Default is /var/lib/usvn
+	}
+}
+```
+
+Uninstall the USVN:
+```puppet
+node default {
+	class {'usvn':
+		ensure => absent,
 	}
 }
 ```
