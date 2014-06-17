@@ -17,7 +17,7 @@ node default {
 }
 ```
 
-Installing other version:
+Installing another version:
 ```puppet
 node default {
 	class {'usvn':
