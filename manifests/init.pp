@@ -26,7 +26,10 @@ class usvn(
 				dbpass => $dbpass,
 			}
 		}
-		'absent': { notify {'Not implemented, yet...':} }
+		'absent': {
+			usvn::apache::remove {'remove::usvn::vhosts':}
+			usvn::uninstall {'uninstalling::usvn':}
+		}
 		default : { fail("Unsupported option for \"ensure\" param: ${ensure}") }
 	}
 }
