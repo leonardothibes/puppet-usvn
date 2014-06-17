@@ -21,7 +21,18 @@ Installing another version:
 ```puppet
 node default {
 	class {'usvn':
-		version => '1.0.6', # Default is 1.0.7
+		version => '1.0.6', # Default is "1.0.7"
+	}
+}
+```
+
+Defining MySQL database params:
+```puppet
+node default {
+	class {'usvn':
+		dbname => 'usvn', # Default is "usvn"
+		dbuser => 'root', # Default is "usvn"
+		dbpass => '1234', # Default is "usvn"
 	}
 }
 ```
